@@ -21,9 +21,22 @@
 	
 	<!-- 회원가입 -->
 	<insert id="empAdd" parameterType="EmpDTO">
-		insert into emp(emp_id, admin_id, emp_pw, name, birth, phone, account, position, hourly_wage, week_time)
-		values (#{emp_id}, #{admin_id}, #{emp_pw}, #{name}, #{birth}, #{phone}, #{account}, #{position}, #{hourly_wage}, #{week_time})
+		insert into emp(emp_id, emp_pw, name, birth, phone, account1, account2)
+		values (#{emp_id}, #{emp_pw}, #{name}, #{birth}, #{phone}, #{account1}, #{account2})
 	</insert>
 	
+	<!-- mypage -->
+   <select id="mypage" parameterType="string" resultType="EmpDTO">
+      select *
+      from emp
+      where emp_id=#{emp_id}
+   </select>
+   
+       <!-- 직원정보수정 -->
+   <update id="update" parameterType="EmpDTO">
+      update emp
+      set emp_id=#{emp_id}, emp_pw=#{emp_pw}, birth=#{birth}, phone=#{phone}, account1=#{account1}, account2=#{account2} 
+      where emp_id=#{emp_id}
+   </update>	
 </mapper>
 

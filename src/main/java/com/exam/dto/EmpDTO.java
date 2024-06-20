@@ -2,35 +2,48 @@ package com.exam.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Alias("EmpDTO")
 public class EmpDTO {
 
+	@NotBlank(message = "아이디를 입력하세요")
 	String emp_id;
-	String admin_id;
 	
-	@Size(min=8, message="최소 8글자를 입력하세요")
+	@Size(min=8, max = 20, message="8글자 이상 20글자 이하의 비밀번호를 입력하세요")
 	String emp_pw;
 	
+	@NotBlank(message = "이름을 입력하세요")
 	String name;
+	
+	@NotNull(message = "생년월일을 입력하세요")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	LocalDate birth;
+	
+	@NotBlank(message = "휴대폰 번호를 입력하세요")
 	String phone;
+	
+	@NotBlank(message = "은행명을 선택하세요")
 	String account1;
+	
+	@NotBlank(message = "계좌번호를 입력하세요")
 	String account2;
+	
 	String position;
 	int hourly_wage;
 	int week_time;
 	
 	public EmpDTO() {}
 
-	public EmpDTO(String emp_id, String admin_id, @Size(min = 8, message = "최소 8글자를 입력하세요") String emp_pw, String name,
+	public EmpDTO(String emp_id, String emp_pw, String name,
 			LocalDate birth, String phone, String account1, String account2, String position, int hourly_wage,
 			int week_time) {
 		this.emp_id = emp_id;
-		this.admin_id = admin_id;
 		this.emp_pw = emp_pw;
 		this.name = name;
 		this.birth = birth;
@@ -50,14 +63,6 @@ public class EmpDTO {
 
 	public void setEmp_id(String emp_id) {
 		this.emp_id = emp_id;
-	}
-
-	public String getAdmin_id() {
-		return admin_id;
-	}
-
-	public void setAdmin_id(String admin_id) {
-		this.admin_id = admin_id;
 	}
 
 	public String getEmp_pw() {
@@ -134,7 +139,7 @@ public class EmpDTO {
 
 	@Override
 	public String toString() {
-		return "EmpDTO [emp_id=" + emp_id + ", admin_id=" + admin_id + ", emp_pw=" + emp_pw + ", name=" + name
+		return "EmpDTO [emp_id=" + emp_id + ", admin_id=" + ", emp_pw=" + emp_pw + ", name=" + name
 				+ ", birth=" + birth + ", phone=" + phone + ", account1=" + account1 + ", account2=" + account2
 				+ ", position=" + position + ", hourly_wage=" + hourly_wage + ", week_time=" + week_time + "]";
 	}

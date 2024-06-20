@@ -11,10 +11,10 @@
 			 //jQuery Ajax
 			   $.ajax({
                    method:"get",
-                   url:"idCheck",   // MemberIdCheckServlet
-                   dataType:'text', // 응답되는 데이터타입, 반환값(사용가능|사용불가)
+                   url:"idCheck",
+                   dataType:'text', //응답 데이터 타입
                    data:{
-                	   userid:$("#userid").val()
+                	   emp_id:$("#emp_id").val()
                    },
                    success:function(data, status, xhr){
                        console.log("data:", data);
@@ -29,24 +29,21 @@
 		}); //end id 중복 체크
 		
 		//비밀번호 확인
-		$("#passwd2").on("keyup", function(){
-			var passwd=$("#passwd").val();
-			var passwd2=$("#passwd2").val();
+		$("#emp_pw2").on("keyup", function(){
+			var emp_pw=$("#emp_pw").val();
+			var emp_pw2=$("#emp_pw2").val();
 			var mesg="비밀번호가 일치합니다.";
-			if(passwd!=passwd2){
+			if(emp_pw!=emp_pw2){
 				mesg="비밀번호가 일치하지 않습니다.";
 			}
 			$("#pwdcheck").text(mesg);
 		}); //end 비밀번호 확인
 		
 		//회원가입 서브밋
-		/*
 		$("form").on("submit", function(){
-			alert("memberForm submit");
-			this.action="MemberAddServlet"; //MemberAddServlet의 매핑값
-			this.method="post"; //정보를 저장하는 것이므로 post 사용
+			this.action="signup";
+			this.method="post";
 		});
-		*/
 	});
 
 </script>
@@ -64,11 +61,12 @@
 </style>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
-    <form:form class="row g-3 m-4" modelAttribute="memberDTO" method="post">
+    <form:form class="row g-3 m-4" modelAttribute="empDTO" method="post">
 		  <div class="row mb-3">
-		    <label for="userid" class="col-sm-2 col-form-label">*아이디</label>
+		    <label for="emp_id" class="col-sm-2 col-form-label">*아이디</label>
 		    <div class="col-auto">
 		      <form:input type="text" class="form-control" path="emp_id"/>
+		      <form:errors path="emp_id"></form:errors>
 		    </div>
 		    <div class="col-auto">
 			    <button type="button" class="btn btn-primary mb-3" id="idDupulicatedcheck">아이디중복</button>
@@ -78,16 +76,16 @@
 		        </div>
 		  </div>
 		 <div class="row mb-3">
-		    <label for="password" class="col-sm-2 col-form-label">*비밀번호</label>
+		    <label for="emp_pw" class="col-sm-2 col-form-label">*비밀번호</label>
 		    <div class="col-auto">
-		      <form:input type="password" class="form-control" path="passwd"/>
-		      <form:errors path="passwd"></form:errors>
+		      <form:input type="password" class="form-control" path="emp_pw"/>
+		      <form:errors path="emp_pw"></form:errors>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
-		    <label for="passwd2" class="col-sm-2 col-form-label">비밀번호확인</label>
+		    <label for="emp_pw2" class="col-sm-2 col-form-label">비밀번호확인</label>
 		    <div class="col-sm-5">
-		      <input type="password" class="form-control" name="passwd2" id="passwd2">
+		      <input type="password" class="form-control" name="emp_pw2" id="emp_pw2">
 		    </div>
 		    <div class="col-sm-3">
 		      <span id="pwdcheck" class="fs-5"></span>
@@ -96,28 +94,31 @@
 		  <hr>
 		  </div>
 		  <div class="row mb-3">
-		    <label for="username" class="col-sm-2 col-form-label">*이름</label>
+		    <label for="name" class="col-sm-2 col-form-label">*이름</label>
 		    <div class="col-auto">
 		      <input type="text" class="form-control" name="name" id="name">
+		      <form:errors path="name"></form:errors>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
-		    <label for="username" class="col-sm-2 col-form-label">*생년월일</label>
+		    <label for="birth" class="col-sm-2 col-form-label">*생년월일</label>
 		    <div class="col-auto">
 		      <input type="date" class="form-control" name="birth" id="birth">
+		      <form:errors path="birth"></form:errors>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
-		      <label for="phone1" class="col-sm-2 col-form-label">*전화번호</label>
+		      <label for="phone" class="col-sm-2 col-form-label">*전화번호</label>
 		     <div class="col-auto">
-		     <input type="text" class="form-control" name="phone" id="phone" placeholder="010">
+		     <input type="text" class="form-control" name="phone" id="phone" placeholder="'-' 를 포함하여 입력">
+		     <form:errors path="phone"></form:errors>
 			   </div>	
 		  </div>
 		  <div class="row mb-3">
-		    <label for="username" class="col-sm-2 col-form-label">*계좌번호</label>
+		    <label for="account1" class="col-sm-2 col-form-label">*계좌번호</label>
 		    <div class="col-auto">
 		      <select name="account1" class="form-control" id="account1">
-				 <option value="선택">선택</option>
+		      	<option value="" selected disabled>선택</option>
 				 <option value="NH농협">NH농협</option>
 				 <option value="KB">KB</option>
 				 <option value="신한">신한</option>
@@ -127,9 +128,11 @@
 				 <option value="부산">부산</option>
 				 <option value="우체국">우체국</option>
 				</select>
+				<form:errors path="account1"></form:errors>
 			</div>
 		    <div class="col-auto">
 		      <input type="text" class="form-control" name="account2" id="account2">
+		      <form:errors path="account2"></form:errors>
 		    </div>
 		  </div>
 		  <hr>

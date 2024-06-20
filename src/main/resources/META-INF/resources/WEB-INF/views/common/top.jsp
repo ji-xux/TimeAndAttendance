@@ -7,23 +7,33 @@
             <div class="container">
                 <div class="row">
                     <nav class="navbar navbar-expand-lg">
-                        <div class="collapse navbar-collapse">
-                            <ul class="navbar-nav">
+                        
+                        <!-- 로그인 안된 상태 -->
+                        <c:if test="${empty login}">
+                          <div class="collapse navbar-collapse">
+                           <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="main">
                                        <img src="images/main.png" style="width: 180px; height: 80px;">
                                     </a>
                                 </li>
-       
                             </ul>
-                        </div>
-                        
-                    
+                          </div>
+                        </c:if>
                         
                         <!-- 로그인 된 상태 
                           session.getAttribute("login") 값이 null이 아닌 경우
                         -->
                          <c:if test="${ ! empty login}">
+                          <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="menu">
+                                       <img src="images/main.png" style="width: 180px; height: 80px;">
+                                    </a>
+                                </li>
+                            </ul>
+                           </div>
                            <ul class="navbar-nav">
                                <li class="nav-item">
                                   <a class="nav-link" href="logout">logout</a>

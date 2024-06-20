@@ -12,4 +12,7 @@ public interface EmpMapper {
 	
 	public EmpDTO idCheck(String emp_id); //id 중복 확인
 	public int empAdd(EmpDTO dto); //회원가입
+	
+	public EmpDTO mypage(String userid); //마이페이지
+	public int update(EmpDTO dto); //직원정보수정
 }
