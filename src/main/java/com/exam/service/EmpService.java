@@ -10,4 +10,8 @@ public interface EmpService {
 	public EmpDTO idCheck(String emp_id);
 	public int empAdd(EmpDTO dto);
 
+	public EmpDTO mypage(String userid);
+	public int update(EmpDTO dto);
+
 }
+

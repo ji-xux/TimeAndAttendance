@@ -9,12 +9,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.exam.dto.EmpDTO;
 import com.exam.service.EmpService;
 
 @Controller
+@SessionAttributes(names = {"login"})  //login 정보저장
 public class MainController {
 	
 	Logger logger=LoggerFactory.getLogger(getClass());
@@ -30,6 +32,10 @@ public class MainController {
 		return "main";
 	}
 	
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
 	
 	//로그인 처리
 	@PostMapping("/main")
@@ -37,7 +43,13 @@ public class MainController {
 		
 		EmpDTO dto=empService.login(m);
 
-		if(dto!=null) {
+		if(dto!=null && "admin".equals(dto.getEmp_id())) {
+			//session 저장
+			model.addAttribute("login", dto); //session scope에 저장
+
+			return "adminMenu";
+		}
+		else if(dto!=null && !"admin".equals(dto.getEmp_id())) {
 			//session 저장
 			model.addAttribute("login", dto); //session scope에 저장
 			return "menu";

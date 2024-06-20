@@ -31,6 +31,18 @@ public class EmpServiceImpl implements EmpService{
 	public EmpDTO idCheck(String emp_id) {
 		return empMapper.idCheck(emp_id);
 	}
+	
+	@Override
+	   public EmpDTO mypage(String userid) {
+	      return empMapper.mypage(userid);
+	 }
+
+	   @Override
+	   public int update(EmpDTO dto) {
+	      return empMapper.update(dto);
+	   }
+
+
 
 
 
