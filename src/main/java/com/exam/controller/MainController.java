@@ -32,11 +32,6 @@ public class MainController {
 		return "main";
 	}
 	
-	@GetMapping("/menu")
-	public String menu() {
-		return "menu";
-	}
-	
 	//로그인 처리
 	@PostMapping("/main")
 	public String login(@RequestParam Map<String, String> m, ModelMap model) {

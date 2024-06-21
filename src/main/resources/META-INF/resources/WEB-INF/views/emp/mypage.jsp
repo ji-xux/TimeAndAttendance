@@ -16,11 +16,26 @@ $(document).ready(function(){
       $("#pwdcheck").text(mesg);
    }); //end 비밀번호 확인
    
-   //수정
-   $("form").on("submit", function(){
-   alert("수정 완료");
-   this.action="EmpUpdate";  
-   this.method="post";
+   //비밀번호확인 미 입력시 넘어가지 않음
+   $("form").on("submit", function(event){
+      var passwd=$("#emp_pw").val();
+      var passwd2=$("#emp_pw2").val();
+      
+      if(passwd2== ""){
+         alert("비밀번호를 확인해주세요");
+         event.preventDefault(); //폼 제출 막기          
+          return false;          //함수종료
+      }
+      
+      if(passwd != passwd2){
+         alert("비밀번호가 일치하지 않습니다.");
+         event.preventDefault();  //폼 제출 막기
+         return false;            //함수종료
+      }
+      
+      alert("수정 완료");
+      this.action="EmpUpdate";  
+      this.method="post";
    });
    
    //취소

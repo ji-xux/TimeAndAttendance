@@ -41,9 +41,25 @@ public class EmpServiceImpl implements EmpService{
 	   public int update(EmpDTO dto) {
 	      return empMapper.update(dto);
 	   }
+	   
+	@Override
+	public EmpDTO searchEmp(String name) {
+		return empMapper.searchEmp(name);
+	}
 
+	@Override
+	public int updateByAdmin(EmpDTO dto) {
+		return empMapper.updateByAdmin(dto);
+	}
 
+	@Override
+	public int deleteByAdmin(String emp_id) {
+		return empMapper.deleteByAdmin(emp_id);
+	}
 
-
+	@Override
+	public EmpDTO searchEmpById(String emp_id) {
+		return empMapper.searchEmpById(emp_id);
+	}
 
 }
