@@ -4,68 +4,77 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Alias("AttendanceDTO")
 public class AttendanceDTO {
-	
-	int no;
-	String emp_id;
-	LocalDate date;
-	LocalTime gowork;
-	LocalTime outwork;
+   
+   int no;
+   String emp_id;
+   
+   @DateTimeFormat(pattern = "yyyy-MM-dd")
+   LocalDate date;
+   
+   @DateTimeFormat(pattern = "hh:mm:ss")
+   LocalTime gowork;
+   
+   @DateTimeFormat(pattern = "hh:mm:ss")
+   LocalTime outwork;
 
-	public AttendanceDTO(int no, String emp_id, LocalDate date, LocalTime gowork, LocalTime outwork) {
-		this.no = no;
-		this.emp_id = emp_id;
-		this.date = date;
-		this.gowork = gowork;
-		this.outwork = outwork;
-	}
+   public AttendanceDTO() {}
 
-	public int getNo() {
-		return no;
-	}
+   public AttendanceDTO(int no, String emp_id, LocalDate date, LocalTime gowork, LocalTime outwork) {
+      this.no = no;
+      this.emp_id = emp_id;
+      this.date = date;
+      this.gowork = gowork;
+      this.outwork = outwork;
+   }
 
-	public void setNo(int no) {
-		this.no = no;
-	}
+   public int getNo() {
+      return no;
+   }
 
-	public String getEmp_id() {
-		return emp_id;
-	}
+   public void setNo(int no) {
+      this.no = no;
+   }
 
-	public void setEmp_id(String emp_id) {
-		this.emp_id = emp_id;
-	}
+   public String getEmp_id() {
+      return emp_id;
+   }
 
-	public LocalDate getDate() {
-		return date;
-	}
+   public void setEmp_id(String emp_id) {
+      this.emp_id = emp_id;
+   }
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
+   public LocalDate getDate() {
+      return date;
+   }
 
-	public LocalTime getGowork() {
-		return gowork;
-	}
+   public void setDate(LocalDate date) {
+      this.date = date;
+   }
 
-	public void setGowork(LocalTime gowork) {
-		this.gowork = gowork;
-	}
+   public LocalTime getGowork() {
+      return gowork;
+   }
 
-	public LocalTime getOutwork() {
-		return outwork;
-	}
+   public void setGowork(LocalTime gowork) {
+      this.gowork = gowork;
+   }
 
-	public void setOutwork(LocalTime outwork) {
-		this.outwork = outwork;
-	}
+   public LocalTime getOutwork() {
+      return outwork;
+   }
 
-	@Override
-	public String toString() {
-		return "AttendanceDTO [no=" + no + ", emp_id=" + emp_id + ", date=" + date + ", gowork=" + gowork + ", outwork="
-				+ outwork + "]";
-	}
-		
+   public void setOutwork(LocalTime outwork) {
+      this.outwork = outwork;
+   }
+
+   @Override
+   public String toString() {
+      return "AttendanceDTO [no=" + no + ", emp_id=" + emp_id + ", date=" + date + ", gowork=" + gowork + ", outwork="
+            + outwork + "]";
+   }
+      
 }

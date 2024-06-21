@@ -13,5 +13,9 @@ public interface EmpService {
 	public EmpDTO mypage(String userid);
 	public int update(EmpDTO dto);
 
+	public EmpDTO searchEmp(String name);
+	public int updateByAdmin(EmpDTO dto);
+	public int deleteByAdmin(String emp_id);
+	public EmpDTO searchEmpById(String emp_id);
 }
 

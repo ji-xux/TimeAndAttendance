@@ -139,7 +139,7 @@ public class EmpDTO {
 
 	@Override
 	public String toString() {
-		return "EmpDTO [emp_id=" + emp_id + ", admin_id=" + ", emp_pw=" + emp_pw + ", name=" + name
+		return "EmpDTO [emp_id=" + emp_id + ", emp_pw=" + emp_pw + ", name=" + name
 				+ ", birth=" + birth + ", phone=" + phone + ", account1=" + account1 + ", account2=" + account2
 				+ ", position=" + position + ", hourly_wage=" + hourly_wage + ", week_time=" + week_time + "]";
 	}

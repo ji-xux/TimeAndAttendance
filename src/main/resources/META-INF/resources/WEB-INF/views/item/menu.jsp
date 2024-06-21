@@ -47,13 +47,13 @@
 
 <div class="container">
    <div class="flex-container">
-      <a class="nav-link" href="main">
+      <a class="nav-link" href="attendance">
          <div class="set">
             <img src="images/clock.jpg" class="set" style="width: 650px; height: 600px;">
             <div class="text">출근 / 퇴근</div>
          </div>
        </a>
-       <a class="nav-link" href="main">
+       <a class="nav-link" href="paycheck">
           <div class="set">
             <img src="images/pay.png" class="set" style="width: 650px; height: 600px;">
             <div class="text">예상 급여</div>

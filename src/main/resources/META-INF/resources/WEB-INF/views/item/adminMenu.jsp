@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- jQuery 설치 -->
-<script src="webjars/jquery/3.7.1/jquery.min.js"></script>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<script src="webjars/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
-   
-   $(document).ready(function(){
-   
-      $("form").on("submit", function(){
-         this.action="login";  
-         this.method="post";
-      });
-      
-   });// ready()
 
 </script>
 <style>
+   .btn{
+      background-color:#FFB71C;
+      color:#646569;
+      font-size:14px;
+      border:none;
+      border-radius:7px;
+      padding-left:10px;
+      padding-right:10px;
+      margin:3px;
+   }
+   
     .flex-container {
     display: flex;
     flex-direction: row;
@@ -45,92 +48,109 @@
     }
     
 </style>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <div class="container">
-   <div class="flex-container">
-   <form:form class="row g-3 m-4" modelAttribute="empDTO" method="post">
-    <form class="row g-3 m-4">
+          <h2>직원 정보 조회</h2>
+    
+    <form action="searchEmp" method="GET">
+        <label for="name">직원 이름:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit" class="btn">조회</button>
+    </form>
+    
+    <c:if test="${not empty empDTO}">
+        <hr>
+        <form:form class="row g-3 m-4" modelAttribute="empDTO" action="updateByAdmin" method="post">
         <div class="row mb-3">
+          <label for="name" class="col-sm-2 col-form-label">ID</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="emp_id" 
+            id="emp_id"
+             value="${empDTO.getEmp_id()}"
+             readonly>
+          </div>
+          </div>
+          
+		<div class="row mb-3">
           <label for="name" class="col-sm-2 col-form-label">이름</label>
           <div class="col-auto">
             <input type="text" class="form-control" name="name" 
             id="name"
-             value="${login.name}"
+             value="${empDTO.getName()}"
              disabled="disabled">
           </div>
+          
         </div>
         
         <div class="row mb-3">
           <label for="birth" class="col-sm-2 col-form-label">생년월일</label>
           <div class="col-auto">
             <input type="date" class="form-control" name="birth" id="birth"
-             value="${login.birth}" disabled="disabled">
+             value="${empDTO.getBirth()}" disabled="disabled">
           </div>
-        </div>
-        <div class="row mb-3">
-            <label for="phone" class="col-sm-2 col-form-label">전화번호</label>   
-         <div class="col-auto">
-           <input type="text" name="phone" 
-                  value="${login.phone}" class="form-control size" id="phone"
-                  placeholder="'-'를 포함하여 입력" disabled="disabled">
-         </div>
-        </div>
-        <div class="row mb-3">
-           <label for="Account1" class="col-sm-2 col-form-label">계좌번호</label>
-          <div class="col-auto">
-           <select name="account1" class="form-control" id="account1" disabled="disabled">
-             <option value="${login.account1}">${login.account1}</option>
-             <option value="NH농협">NH농협</option>
-             <option value="KB">KB</option>
-             <option value="신한">신한</option>
-             <option value="우리">우리</option>
-             <option value="하나">하나</option>
-             <option value="IM뱅크">IM뱅크</option>
-             <option value="부산">부산</option>
-             <option value="우체국">우체국</option>
-            </select>
-         </div>
-         <div class="col-auto">
-           <input type="text" name="account2" 
-                  value="${login.account2}"
-            class="form-control" id="account2" placeholder="숫자만 입력" disabled="disabled">
-         </div>
-        </div>
-        
-        <hr>
-
-          <div class="row mb-3">
-          <label for="emp_id" class="col-sm-2 col-form-label">직급</label>
-          <div class="col-auto">
-            <input type="text" class="form-control" id="emp_id" name="emp_id" 
-             value="${login.emp_id}"
-             disabled="disabled">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="emp_id" class="col-sm-2 col-form-label">생년월일</label>
-          <div class="col-auto">
-            <input type="text" class="form-control" id="emp_id" name="emp_id" 
-             value="${login.emp_id}"
-             disabled="disabled">
-          </div>
-        </div>
-
-          <div class="col-12">
-          	<button type="submit" class="btn btn-primary">삭제</button>
-          	<button type="submit" class="btn btn-primary">저장</button>
           </div>
           
-
-          </form>
-         </form:form>
-
-       <a class="nav-link" href="main">
-          <div class="set">
-            <img src="images/pay.png" class="set" style="width: 650px; height: 600px;">
-            <div class="text">예상 급여</div>
+         <div class="row mb-3">
+            <label for="phone" class="col-sm-2 col-form-label">전화번호</label>
+         <div class="col-auto">
+           <input type="text" name="phone" 
+                  value="${empDTO.getPhone()}" class="form-control size" id="phone"
+                  disabled="disabled">
          </div>
-       </a>
+         </div>
+         
+         <div class="row mb-3">
+            <label for="account1" class="col-sm-2 col-form-label">계좌번호</label>   
+         <div class="col-auto">
+           <input type="text" name="account1" 
+                  value="${empDTO.getAccount1()}" class="form-control size" id="phone"
+                  disabled="disabled">
+         </div>
+                  <div class="col-auto">
+           <input type="text" name="account2" 
+                  value="${empDTO.getAccount2()}"
+            class="form-control" id="account2" disabled="disabled">
+         </div>
+         </div>
+      	<div class="row mb-3">
+          <label for="position" class="col-sm-2 col-form-label">직급</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="position" 
+            id="name"
+             value="${empDTO.getPosition()}">
+          </div>
+        </div>
+          <div class="row mb-3">
+          <label for="hourly_wage" class="col-sm-2 col-form-label">시급</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="hourly_wage" 
+            id="name"
+             value="${empDTO.getHourly_wage()}">
+          </div>
+        </div>
+        
+         <div class="row mb-3">
+          <label for="week_time" class="col-sm-2 col-form-label">주 근무시간</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="week_time" 
+            id="name"
+             value="${empDTO.getWeek_time()}">
+          </div>
+        </div>
+        <div class="col-12">
+			<button type="submit" class="btn btn-primary" id="updateByAdmin">저장</button>
+   	 </div>
+    </form:form>
+        <!-- 삭제 버튼 form -->
+        <form action="${pageContext.request.contextPath}/deleteByAdmin" method="post">
+            <input type="hidden" name="emp_id" value="${empDTO.getEmp_id()}">
+            <button type="submit" class="btn btn-primary" id="deleteByAdmin">삭제</button>
+        </form>
+    </c:if>
+    
+    <c:if test="${empty empDTO && not empty errorMessage}">
+        <p>존재하지 않는 직원입니다</p>
+    </c:if>
+    
+    <hr>
    </div>
-</div> 

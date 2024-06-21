@@ -58,6 +58,10 @@
       padding-right:10px;
       margin:5px;
    }
+   .text{
+         color:red;
+         font-size:17px !important;
+   }
 </style>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="container">
@@ -84,10 +88,10 @@
 		  </div>
 		  <div class="row mb-3">
 		    <label for="emp_pw2" class="col-sm-2 col-form-label">비밀번호확인</label>
-		    <div class="col-sm-5">
+		    <div class="col-auto">
 		      <input type="password" class="form-control" name="emp_pw2" id="emp_pw2">
 		    </div>
-		    <div class="col-sm-3">
+		    <div class="col-auto">
 		      <span id="pwdcheck" class="fs-5"></span>
 		    </div>
 		  <br><br><br>  

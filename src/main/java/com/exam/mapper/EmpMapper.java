@@ -14,5 +14,10 @@ public interface EmpMapper {
 	public int empAdd(EmpDTO dto); //회원가입
 	
 	public EmpDTO mypage(String userid); //마이페이지
-	public int update(EmpDTO dto); //직원정보수정
+	public int update(EmpDTO dto); //직원용 마이페이지 정보 수정
+		
+	public EmpDTO searchEmp(String name);
+	public EmpDTO searchEmpById(String emp_id);
+	public int updateByAdmin(EmpDTO dto); //관리자용 직원 정보 수정
+	public int deleteByAdmin(String emp_id); //관리자용 직원 삭제
 }
