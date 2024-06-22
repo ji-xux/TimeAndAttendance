@@ -4,10 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.exam.mapper.AttendanceMapper">
+
+	<insert id="goInsert" parameterType="AttendanceDTO">
+		insert into attendance(emp_id, date, gowork)
+		values (#{emp_id}, #{date}, #{gowork})
+	</insert>
+
+	<update id="outUpdate" parameterType="AttendanceDTO">
+		update attendance
+		set outwork=#{outwork}
+		where emp_id=#{emp_id} AND date=#{date};
+	</update>
+
+	<select id="allAtt" parameterType="String"
+		resultType="AttendanceDTO">
+		select *
+		from attendance
+		where emp_id=#{emp_id}
+	</select>
    
-   <insert id="goInsert" parameterType="AttendanceDTO">
-      insert into attendance(emp_id, date, gowork)
-      values (#{emp_id}, #{date}, #{gowork})
-   </insert>
-     
 </mapper>

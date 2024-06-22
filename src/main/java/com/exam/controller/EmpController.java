@@ -28,6 +28,7 @@ public class EmpController {
 		this.empService=empService;
 	}
 	
+	//id 중복 체크
 	//@ResponseBody는 스프링 컨트롤러 메서드가 반환하는 데이터를 HTTP 응답 본문에 직접 쓰도록 지정하는 역할
 	@GetMapping("/idCheck")
 	public @ResponseBody String idCheck(@RequestParam String emp_id) {
@@ -39,6 +40,7 @@ public class EmpController {
 		return mesg;
 	}
 	
+	//회원가입 화면
 	@GetMapping("/signup")
 	public String signup(ModelMap m) {
 		EmpDTO dto=new EmpDTO();
@@ -47,6 +49,7 @@ public class EmpController {
 		return "empForm";
 	}
 	
+	//회원가입 로직
 	@PostMapping("/signup")
 	public String signup(@Valid EmpDTO dto, BindingResult result) {
 		if(result.hasErrors()) {
@@ -58,6 +61,7 @@ public class EmpController {
 		return "redirect:main";
 	}
 	
+	//마이페이지
 	@GetMapping("/mypage")
 	   public String mypage(ModelMap m) {
 	      
@@ -74,22 +78,23 @@ public class EmpController {
 	      
 	      return "mypage";
 	   }
-	   
-	   @PostMapping("/EmpUpdate")
-	   public String EmpUpdate(@ModelAttribute("empDTO") EmpDTO empDTO, ModelMap m) {
-	      
-	      logger.info("logger:update:{}", empDTO);
-	      
-	      EmpDTO dto = (EmpDTO)m.getAttribute("login"); 
-	      empDTO.setEmp_id(dto.getEmp_id());
-	      
-	      int n=empService.update(empDTO);          //update한 정보 데이터베이스에 갱신
-	      logger.info("logger:update:{}", n);
-	      
-	      String userid = empDTO.getEmp_id();        //갱신한 정보의 아이디를 이용하여
-	      EmpDTO updatedDTO = empService.mypage(userid); //갱신한 정보를 다시 login객체 정보에 넣기위한 객체 생성
-	      m.addAttribute("login",updatedDTO);
-	      
-	      return "mypage";
-	   }
+
+	//마이페이지 정보 수정
+	@PostMapping("/EmpUpdate")
+	public String EmpUpdate(@ModelAttribute("empDTO") EmpDTO empDTO, ModelMap m) {
+
+		logger.info("logger:update:{}", empDTO);
+
+		EmpDTO dto = (EmpDTO)m.getAttribute("login"); 
+		empDTO.setEmp_id(dto.getEmp_id());
+
+		int n=empService.update(empDTO);          //update한 정보 데이터베이스에 갱신
+		logger.info("logger:update:{}", n);
+
+		String userid = empDTO.getEmp_id();        //갱신한 정보의 아이디를 이용하여
+		EmpDTO updatedDTO = empService.mypage(userid); //갱신한 정보를 다시 login객체 정보에 넣기위한 객체 생성
+		m.addAttribute("login",updatedDTO);
+
+		return "mypage";
+	}
 }

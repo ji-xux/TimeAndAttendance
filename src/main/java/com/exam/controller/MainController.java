@@ -39,11 +39,11 @@ public class MainController {
 		EmpDTO dto=empService.login(m);
 
 		if(dto!=null && "admin".equals(dto.getEmp_id())) {
-			//session 저장
 			model.addAttribute("login", dto); //session scope에 저장
 
 			return "adminMenu";
 		}
+		
 		else if(dto!=null && !"admin".equals(dto.getEmp_id())) {
 			//session 저장
 			model.addAttribute("login", dto); //session scope에 저장

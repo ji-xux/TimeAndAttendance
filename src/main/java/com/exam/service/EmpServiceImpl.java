@@ -12,7 +12,7 @@ import com.exam.mapper.EmpMapper;
 public class EmpServiceImpl implements EmpService{
 
 	EmpMapper empMapper;
-	
+
 	public EmpServiceImpl(EmpMapper empMapper) {
 		this.empMapper = empMapper;
 	}
@@ -31,17 +31,17 @@ public class EmpServiceImpl implements EmpService{
 	public EmpDTO idCheck(String emp_id) {
 		return empMapper.idCheck(emp_id);
 	}
-	
-	@Override
-	   public EmpDTO mypage(String userid) {
-	      return empMapper.mypage(userid);
-	 }
 
-	   @Override
-	   public int update(EmpDTO dto) {
-	      return empMapper.update(dto);
-	   }
-	   
+	@Override
+	public EmpDTO mypage(String userid) {
+		return empMapper.mypage(userid);
+	}
+
+	@Override
+	public int update(EmpDTO dto) {
+		return empMapper.update(dto);
+	}
+
 	@Override
 	public EmpDTO searchEmp(String name) {
 		return empMapper.searchEmp(name);
