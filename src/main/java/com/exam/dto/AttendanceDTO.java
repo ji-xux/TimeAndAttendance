@@ -1,29 +1,20 @@
 package com.exam.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import org.apache.ibatis.type.Alias;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Alias("AttendanceDTO")
 public class AttendanceDTO {
    
    int no;
    String emp_id;
-   
-   @DateTimeFormat(pattern = "yyyy-MM-dd")
-   LocalDate date;
-   
-   @DateTimeFormat(pattern = "hh:mm:ss")
-   LocalTime gowork;
-   
-   @DateTimeFormat(pattern = "hh:mm:ss")
-   LocalTime outwork;
+   String date;
+   String gowork;
+   String outwork;
 
    public AttendanceDTO() {}
 
-   public AttendanceDTO(int no, String emp_id, LocalDate date, LocalTime gowork, LocalTime outwork) {
+   public AttendanceDTO(int no, String emp_id, String date, String gowork, String outwork) {
       this.no = no;
       this.emp_id = emp_id;
       this.date = date;
@@ -47,27 +38,27 @@ public class AttendanceDTO {
       this.emp_id = emp_id;
    }
 
-   public LocalDate getDate() {
+   public String getDate() {
       return date;
    }
 
-   public void setDate(LocalDate date) {
+   public void setDate(String date) {
       this.date = date;
    }
 
-   public LocalTime getGowork() {
+   public String getGowork() {
       return gowork;
    }
 
-   public void setGowork(LocalTime gowork) {
+   public void setGowork(String gowork) {
       this.gowork = gowork;
    }
 
-   public LocalTime getOutwork() {
+   public String getOutwork() {
       return outwork;
    }
 
-   public void setOutwork(LocalTime outwork) {
+   public void setOutwork(String outwork) {
       this.outwork = outwork;
    }
 

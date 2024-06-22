@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.apache.ibatis.type.Alias;
@@ -23,6 +24,7 @@ public class EmpDTO {
 	
 	@NotNull(message = "생년월일을 입력하세요")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past(message = "가입할 수 없는 생년월일입니다")
 	LocalDate birth;
 	
 	@NotBlank(message = "휴대폰 번호를 입력하세요")

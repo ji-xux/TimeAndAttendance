@@ -5,12 +5,24 @@
   
 <mapper namespace="com.exam.mapper.WageMapper">
    
-   <!-- paycheck -->
-   <select id="paycheck" parameterType="string" resultType="WageDTO">
-      select *
-      from wage
-      where emp_id=#{emp_id}
-   </select>
-   
-     
+	<!-- paycheck -->
+	<select id="paycheck" parameterType="string" resultType="WageDTO">
+		select *
+		from wage
+		where emp_id=#{emp_id}
+	</select>
+
+	<!-- wage 테이블 수정 -->
+	<update id="updateWage" parameterType="WageDTO">
+		update wage
+		set emp_id=#{emp_id}, month_wage=#{month_wage}, holiday_pay=#{holiday_pay}, all_wage=#{all_wage}
+		where emp_id=#{emp_id}
+	</update>
+
+	<!-- wage 테이블 삽입 -->
+	<insert id="insertWage" parameterType="WageDTO">
+		insert into wage(emp_id, month_wage, holiday_pay, all_wage)
+		values(#{emp_id}, #{month_wage}, #{holiday_pay}, #{all_wage})
+	</insert>
+	
 </mapper>

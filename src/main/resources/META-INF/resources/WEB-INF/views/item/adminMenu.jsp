@@ -7,6 +7,8 @@
 
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Pridi:wght@200;300;400;500;600;700&family=Viga&display=swap');
+   
    .btn{
       background-color:#FFB71C;
       color:#646569;
@@ -47,24 +49,32 @@
         opacity: 1;
     }
     
+    h2 {
+        font-weight: bold;
+        text-align:center;
+      color:#646569;
+      font-size:40px;
+      font-family: "Blinker", sans-serif;
+    }
+    
 </style>
 
 <div class="container">
-          <h2>직원 정보 조회</h2>
+          <h2>직원 정보 조회</h2><br>
     
     <form action="searchEmp" method="GET">
-        <label for="name">직원 이름:</label>
+        <label for="name">직원명:</label>
         <input type="text" id="name" name="name" required>
         <button type="submit" class="btn">조회</button>
     </form>
-    
-    <c:if test="${not empty empDTO}">
+        <c:if test="${empty empDTO && not empty errorMessage}">
+        <p>직원명을 확인하세요</p>
+    </c:if>
         <hr>
         <form:form class="row g-3 m-4" modelAttribute="empDTO" action="updateByAdmin" method="post">
         <div class="row mb-3">
-          <label for="name" class="col-sm-2 col-form-label">ID</label>
           <div class="col-auto">
-            <input type="text" class="form-control" name="emp_id" 
+            <input type="hidden" class="form-control" name="emp_id" 
             id="emp_id"
              value="${empDTO.getEmp_id()}"
              readonly>
@@ -142,15 +152,41 @@
    	 </div>
     </form:form>
         <!-- 삭제 버튼 form -->
-        <form action="${pageContext.request.contextPath}/deleteByAdmin" method="post">
+        <form action="deleteByAdmin" method="post">
             <input type="hidden" name="emp_id" value="${empDTO.getEmp_id()}">
             <button type="submit" class="btn btn-primary" id="deleteByAdmin">삭제</button>
         </form>
-    </c:if>
+        
+        <hr>
+    	<div class="row mb-3">
+          <label for="month_wage" class="col-sm-2 col-form-label">월 기본급</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="month_wage" 
+            id="month_wage" disabled="disabled"
+             value="${wageDTO.getMonth_wage()}"
+             >
+          </div>   
+        </div>
+           <div class="row mb-3">
+          <label for="holiday_pay" class="col-sm-2 col-form-label">주휴수당</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="holiday_pay"
+            id="holiday_pay"
+             value="${wageDTO.getHoliday_pay()}"
+             disabled="disabled">
+          </div>   
+        </div>
+           <div class="row mb-3">
+          <label for="all_wage" class="col-sm-2 col-form-label">총 급여</label>
+          <div class="col-auto">
+            <input type="text" class="form-control" name="all_wage" 
+            id="all_wage"
+             value="${wageDTO.getAll_wage()}"
+             disabled="disabled">
+          </div>   
+        </div>
+        
+
     
-    <c:if test="${empty empDTO && not empty errorMessage}">
-        <p>존재하지 않는 직원입니다</p>
-    </c:if>
-    
-    <hr>
+
    </div>
