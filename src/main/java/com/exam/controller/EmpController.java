@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -55,6 +56,10 @@ public class EmpController {
 		if(result.hasErrors()) {
 			return "empForm";
 		}
+		
+		//비밀번호 암호화
+		String encptPw=new BCryptPasswordEncoder().encode(dto.getEmp_pw());
+		dto.setEmp_pw(encptPw);
 		
 		logger.info("logger:signup:{}", dto);
 		int n=empService.empAdd(dto);

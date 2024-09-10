@@ -22,7 +22,7 @@
            var now = new Date();
            var date = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
            var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-           $("#gotime").text("출근 시간: " + time);
+           $("#gotime").text(" : " + time);
            
            $.ajax({
                method:"post",
@@ -58,7 +58,7 @@
                    console.log("data:", data);
                    alert(data);
                    if(data === "퇴근 정보가 저장되었습니다."){
-                      $("#outtime").text("퇴근 시간: " + time);
+                      $("#outtime").text(" : " + time);
                    }
                },
                error:function(xhr, status, error){
@@ -73,22 +73,44 @@
 
 </script>
 <style>
+	.time_area{
+		width : 100%;	
+	}
+	.time_area > div {
+		width : 100%;
+	}
+	.time_area .real_time{
+		display : flex;
+		gap : 5px;
+		color: #FFB71C;
+    	font-weight: 700;
+    	justify-content: center;
+    	font-size : 28px;
+	}
+	.row2{
+		display: flex;
+    	justify-content: center;
+    	gap:5px;
+    	margin : 10px 0px;
+	}
     .flex-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
      }
      .btn{
-      background-color:#FFB71C;
-      color:#646569;
+      background : #FFFFFF;
+      border : 1px solid #FFB71C;
+      color:#FFB71C;
+      font-weight : 700;
       font-size:14px;
-      border:none;
-      border-radius:7px;
       padding-left:10px;
       padding-right:10px;
       margin:5px;
+      width : 140px;
    }
    table {
+   		margin-top: 20px;
        width: 100%;
        border-collapse: collapse;
    }
@@ -106,6 +128,27 @@
 </style>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container">
+	<div class="time_area">
+		<div class="row1">
+			<div class="real_time">
+				<div id="date"></div><div id="time"></div>
+			</div>
+		</div>	
+	</div>
+	<div class="row2">
+		<div>
+			<button type="button" class="btn btn-primary" id="gowork">
+				출근<span id="gotime"></span>
+			</button>
+			
+		</div>
+		<div>
+			<button type="button" class="btn btn-primary" id="outwork">
+				퇴근<span id="outtime"></span>
+			</button>
+		</div>
+	</div>
+	<div class="row3"></div>
    <div class="flex-container">
       <table>
         <thead>
@@ -124,16 +167,6 @@
                 </tr>
             </c:forEach>
         </tbody>
-    </table>
-           <div id="date"></div>
-           <div id="time"></div>
-           <hd>
-           <div class="col-12">
-          <button type="button" class="btn btn-primary" id="gowork">출근</button>
-          <div id="gotime"></div>
-          <button type="button" class="btn btn-primary" id="outwork">퇴근</button>
-          <div id="outtime"></div>
-        </div>
-           
+    </table>           
    </div>
 </div> 
