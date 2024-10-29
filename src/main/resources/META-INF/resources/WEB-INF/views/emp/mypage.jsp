@@ -85,7 +85,7 @@ $(document).ready(function(){
         <div class="row mb-3">
           <label for="emp_pw" class="col-sm-2 col-form-label">비밀번호</label>
           <div class="col-auto">
-            <form:input type="password" class="form-control" path="emp_pw" value="${login.emp_pw}"/>
+            <form:input type="password" class="form-control" path="emp_pw" value="${mypageDTO.emp_pw}"/>
             <form:errors path="emp_pw"></form:errors>
           </div>
         </div>

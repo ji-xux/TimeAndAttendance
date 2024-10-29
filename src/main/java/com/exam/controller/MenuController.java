@@ -21,7 +21,7 @@ import com.exam.service.EmpService;
 import com.exam.service.WageService;
 
 @Controller
-@SessionAttributes(names = {"login", "attDTO"})  //login 정보저장
+@SessionAttributes(names = {"login", "attDTO", "mypageDTO"})  //login 정보저장
 public class MenuController {
    
    Logger logger=LoggerFactory.getLogger(getClass());
@@ -79,8 +79,8 @@ public class MenuController {
       AttendanceDTO dto = (AttendanceDTO)m.getAttribute("attDTO");
       EmpDTO logindto = (EmpDTO)m.getAttribute("login");
       
-      logger.info("logger:출근정보:{}", dto); 
-      logger.info("logger:출근정보:{}", dto.getEmp_id()); 
+      //logger.info("logger:출근정보:{}", dto); 
+      //logger.info("logger:출근정보:{}", dto.getEmp_id()); 
       logger.info("logger:로그인정보:{}", logindto.getEmp_id()); 
       
       String mesg="퇴근 정보가 저장되었습니다.";
